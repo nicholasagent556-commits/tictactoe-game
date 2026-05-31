@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tic Tac Toe</h1>
+            <div class="mode-selector">
+                <button id="btn-solo" class="mode-btn active">Solo</button>
+                <button id="btn-multi" class="mode-btn">Multiplayer</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Solo Mode UI -->
+            <div id="solo-ui" class="game-ui">
+                <div class="status" id="status">Your turn (X)</div>
+                <div class="board" id="board">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+                <button id="restart" class="restart-btn hidden">Play Again</button>
+            </div>
+
+            <!-- Multiplayer Mode UI -->
+            <div id="multi-ui" class="game-ui hidden">
+                <!-- Room Lobby -->
+                <div id="room-lobby">
+                    <div class="room-input-group">
+                        <input type="text" id="room-code-input" maxlength="6" placeholder="ABC123">
+                        <button id="btn-create-room" class="action-btn">Create Room</button>
+                    </div>
+                    <div class="divider"><span>or</span></div>
+                    <button id="btn-join-room" class="action-btn secondary">Join Room</button>
+                </div>
+
+                <!-- Waiting Room -->
+                <div id="waiting-room" class="hidden">
+                    <div class="room-code-display">
+                        <span class="label">Room Code:</span>
+                        <span class="code" id="display-room-code">------</span>
+                    </div>
+                    <div class="status" id="multi-status">Waiting for opponent...</div>
+                    <button id="btn-copy-code" class="action-btn small">Copy Code</button>
+                </div>
+
+                <!-- Multiplayer Game -->
+                <div id="multi-game" class="hidden">
+                    <div class="status" id="multi-status-game">Waiting for opponent...</div>
+                    <div class="board" id="board-multi">
+                        <div class="cell" data-index="0"></div>
+                        <div class="cell" data-index="1"></div>
+                        <div class="cell" data-index="2"></div>
+                        <div class="cell" data-index="3"></div>
+                        <div class="cell" data-index="4"></div>
+                        <div class="cell" data-index="5"></div>
+                        <div class="cell" data-index="6"></div>
+                        <div class="cell" data-index="7"></div>
+                        <div class="cell" data-index="8"></div>
+                    </div>
+                    <button id="restart-multi" class="restart-btn hidden">Play Again</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="score-board">
+                <div class="score">
+                    <span class="score-label x-color">X</span>
+                    <span class="score-value" id="score-x">0</span>
+                </div>
+                <div class="score">
+                    <span class="score-label">Draw</span>
+                    <span class="score-value" id="score-draw">0</span>
+                </div>
+                <div class="score">
+                    <span class="score-label o-color">O</span>
+                    <span class="score-value" id="score-o">0</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

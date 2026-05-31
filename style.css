@@ -1,0 +1,443 @@
+/* Tic Tac Toe - Dark Theme Styles */
+
+:root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface-elevated: #252525;
+    --primary: #ff6b6b;
+    --secondary: #4ecdc4;
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --accent: #ffe66d;
+    --border: #333333;
+    --cell-hover: #2a2a2a;
+    --cell-size: 80px;
+    --cell-gap: 8px;
+}
+
+@media (min-width: 640px) {
+    :root {
+        --cell-size: 100px;
+    }
+}
+
+@media (min-width: 1024px) {
+    :root {
+        --cell-size: 120px;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+.container {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Header */
+header {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+}
+
+.mode-selector {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.mode-btn {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border: 2px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+}
+
+.mode-btn:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.mode-btn.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--bg);
+}
+
+/* Main */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.game-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Status */
+.status {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    text-align: center;
+    min-height: 1.5em;
+    transition: opacity 0.2s ease;
+}
+
+/* Board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, var(--cell-size));
+    grid-template-rows: repeat(3, var(--cell-size));
+    gap: var(--cell-gap);
+    background: var(--surface);
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    background: var(--surface-elevated);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+@media (min-width: 1024px) {
+    .cell {
+        font-size: 4rem;
+    }
+}
+
+.cell:hover:not(.occupied):not(.game-over) {
+    background: var(--cell-hover);
+}
+
+.cell.occupied {
+    cursor: default;
+}
+
+.cell.x {
+    color: var(--primary);
+}
+
+.cell.o {
+    color: var(--secondary);
+}
+
+.cell.winning {
+    animation: pulse 1s ease-in-out infinite;
+    color: var(--accent);
+    text-shadow: 0 0 20px var(--accent);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Restart Button */
+.restart-btn {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 12px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(255, 230, 109, 0.3);
+}
+
+/* Multiplayer UI */
+#room-lobby {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.room-input-group {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    max-width: 300px;
+}
+
+#room-code-input {
+    flex: 1;
+    font-family: inherit;
+    font-size: 1.25rem;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 4px;
+}
+
+#room-code-input::placeholder {
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+}
+
+#room-code-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.action-btn {
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 12px 24px;
+    background: var(--primary);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+}
+
+.action-btn.secondary {
+    background: var(--secondary);
+}
+
+.action-btn.secondary:hover {
+    box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
+}
+
+.action-btn.small {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.divider span {
+    padding: 0 16px;
+}
+
+/* Waiting Room */
+#waiting-room {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.room-code-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.room-code-display .label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.room-code-display .code {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 8px;
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(255, 230, 109, 0.5);
+}
+
+/* Multiplayer Game */
+#multi-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+}
+
+.score-board {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 16px;
+    background: var(--surface);
+    border-radius: 12px;
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.score-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.score-label.x-color {
+    color: var(--primary);
+}
+
+.score-label.o-color {
+    color: var(--secondary);
+}
+
+.score-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+    .container {
+        gap: 16px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .mode-btn {
+        padding: 10px 16px;
+        font-size: 0.875rem;
+    }
+
+    .board {
+        padding: 12px;
+    }
+
+    .cell {
+        font-size: 2.5rem;
+    }
+
+    .score-board {
+        gap: 16px;
+        padding: 12px;
+    }
+
+    .score-value {
+        font-size: 1.25rem;
+    }
+}
+
+/* Touch targets */
+@media (pointer: coarse) {
+    .cell,
+    .mode-btn,
+    .restart-btn,
+    .action-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Error state */
+.error {
+    color: var(--primary);
+    font-size: 0.875rem;
+    margin-top: 8px;
+}
+
+/* Connected indicator */
+.connection-status {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--text-secondary);
+}
+
+.connection-status.connected {
+    color: var(--secondary);
+}
+
+.connection-status.disconnected {
+    color: var(--primary);
+}
